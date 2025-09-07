@@ -1,14 +1,14 @@
-file,group_id,keep_flag,score,datetime,camera_make,camera_model,lat,lon,tag
-photos/DSCF0031.JPG,,,0.472923,2014:08:22 21:16:31,FUJIFILM,X100S,,,
-photos/2024-10-31 10.32.41.jpg,,,0.531609,2024:10:31 10:32:41,Apple,iPhone 16 Pro,,,
-photos/DSCF0030.JPG,,,0.49658,2014:08:22 21:16:10,FUJIFILM,X100S,,,
-photos/DSCF0137.JPG,,,0.53873,2014:09:13 12:46:26,FUJIFILM,X100S,,,
-photos/DSCF0145.JPG,,,0.466909,2014:09:14 13:23:49,FUJIFILM,X100S,,,
-photos/2024-10-31 10.32.42.jpg,,,0.542572,2024:10:31 10:32:42,Apple,iPhone 16 Pro,,,
-photos/DSCF0014.JPG,,,0.480839,2014:08:22 21:06:38,FUJIFILM,X100S,,,
-photos/2024-10-31 10.27.28.jpg,,,0.540921,2024:10:31 10:27:27,Apple,iPhone 16 Pro,,,
-photos/DSCF0013.JPG,,,0.484039,2014:08:22 21:06:25,FUJIFILM,X100S,,,
-photos/2024-10-31 10.27.25.jpg,,,0.547576,2024:10:31 10:27:24,Apple,iPhone 16 Pro,,,
-photos/2024-10-31 10.27.27.jpg,,,0.541194,2024:10:31 10:27:26,Apple,iPhone 16 Pro,,,
-photos/2024-10-31 10.32.43.jpg,,,0.542572,2024:10:31 10:32:42,Apple,iPhone 16 Pro,,,
-photos/DSCF0135.JPG,,,0.491452,2014:09:13 12:35:47,FUJIFILM,X100S,,,
+filename,people
+photos/DSCF0031.JPG,"person1,person2"
+photos/2024-10-31 10.32.41.jpg,"person3,person4,person5,person6,person7,person8,person9"
+photos/DSCF0030.JPG,person1
+photos/DSCF0137.JPG,
+photos/DSCF0145.JPG,person2
+photos/2024-10-31 10.32.42.jpg,"person3,person10,person11,person8,person5,person12,person13"
+photos/DSCF0014.JPG,"person1,person2,person14,person15"
+photos/2024-10-31 10.27.28.jpg,"person3,person16"
+photos/DSCF0013.JPG,"person14,person1,person17,person18"
+photos/2024-10-31 10.27.25.jpg,person3
+photos/2024-10-31 10.27.27.jpg,"person3,person19"
+photos/2024-10-31 10.32.43.jpg,"person3,person10,person11,person8,person5,person12,person13"
+photos/DSCF0135.JPG,"person20,person21,person22"
