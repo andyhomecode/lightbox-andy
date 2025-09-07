@@ -9,6 +9,11 @@
 - Runs on Ubuntu linux and Windows and maybe Mac
 - Java, designed to be as portable as possible
 
+## Specific Code Features
+
+- prebuffering and prescaling images when opening folder to improve UI when editing
+- TODO: may need to batch the preloading if memory becomes a concern.
+
 ## Development Guidelines
 
 You are my coding copilot.

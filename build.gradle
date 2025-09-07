@@ -13,9 +13,17 @@ dependencies {
     // TODO: Add dependencies for image/video display, MIDI, etc.
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+
+// Set up correct source directory for Gradle Java plugin
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
 }
 
 task run(type: JavaExec) {
