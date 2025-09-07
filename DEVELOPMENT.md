@@ -9,6 +9,15 @@
 - Runs on Ubuntu linux and Windows and maybe Mac
 - Java, designed to be as portable as possible
 
+- pre-processing stack built in python and stored in a text file or database to speed up categoriztion:
+* identify duplicates
+* extract exif infomration such as date and time, and lat/long location
+* convert lat long into location names
+* identify people in photo
+* describe event or key things in photo like boat, camping, birthday, car trip
+* categorize non-photos like screenshots, memes.
+
+
 ## Specific Code Features
 
 - prebuffering and prescaling images when opening folder to improve UI when editing

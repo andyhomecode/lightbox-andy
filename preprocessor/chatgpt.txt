@@ -1,0 +1,131 @@
+"""
+photo_dedupe_catalog.py
+
+Scan a folder of photos, identify"""
+ duplicate/near-duplicate groups, score each photo to pick the best,
+extract EXIF (including GPS), and (optionally) tag each photo with a simple description using CLIP
+from a user-supplied label list (e.g., "Birthday party, Beach, Boating, Camping").
+
+Outputs:
+  - photo_catalog.csv   (one row per image; includes group_id, keep_flag, score, EXIF, GPS, tags)
+  - duplicate_groups.json  (groups with their members and the chosen "keep" file)
+  - keep_list.txt / delete_list.txt  (paths; optional)
+  - review/keep_symlinks / review/dupe_symlinks (optional symlink folders for visual review)
+
+Dependencies (install as needed):
+  pip install imagededup[cnn] pillow imagehash opencv-python piexif
+  # Optional:
+  pip install pillow-heif            # HEIC/HEIF support
+  pip install open-clip-torch torch  # CLIP tagging (CPU is fine for small folders)
+  pip install geopy                  # reverse geocoding (if you enable it later; requires internet)
+
+Usage:
+  python photo_dedupe_catalog.py --dir "/path/to/photos" --labels "Birthday party,Beach,Boating,Camping"
+  # Speed-first (perceptual hash):
+  python photo_dedupe_catalog.py --dir "/photos" --phash-threshold 8
+  # Stronger near-dup detection (CNN):
+  python photo_dedupe_catalog.py --dir "/photos" --use-cnn --cnn-threshold 0.92
+
+Notes:
+  - The scoring weights are configurable. See --help.
+  - The script does NOT delete anything; it only flags and (optionally) creates symlinks for review.
+"""
+
+
+pip install imagededup[cnn] pillow imagehash opencv-python piexif
+# optional:
+pip install pillow-heif
+pip install open-clip-torch torch
+
+python photo_dedupe_catalog.py --dir "/path/to/photos" \
+  --phash-threshold 8 \
+  --labels "Birthday party,Beach,Boating,Camping" \
+  --write-keep-delete --make-review-symlinks
+
+
+Love it — let’s level this up. Here’s a ready-to-run Python tool that:
+
+* finds duplicate/near-duplicate images (fast PHash or stronger CNN),
+* picks the “best” in each group from **your** criteria (weights),
+* extracts EXIF (including GPS as decimal lat/lon, camera info, timestamp),
+* optionally tags each photo with a human label (e.g., **“Birthday party”**, **“Beach”**, **“Boating”**, **“Camping”**) using CLIP zero-shot,
+* writes a clean **CSV catalog** + a **JSON** of dup groups, and
+* can produce keep/delete lists and review symlink folders (non-destructive).
+
+### Download the script
+
+[Download `photo_dedupe_catalog.py`](sandbox:/mnt/data/photo_dedupe_catalog.py)
+
+### Install (pick what you need)
+
+```bash
+# Core
+pip install imagededup[cnn] pillow imagehash opencv-python piexif
+
+# Optional: iPhone HEIC
+pip install pillow-heif
+
+# Optional: tagging with CLIP (CPU is fine)
+pip install open-clip-torch torch
+
+# Optional: reverse geocoding (not required; script outputs lat/lon already)
+pip install geopy
+```
+
+### Run it (examples)
+
+```bash
+# Fast near-dup pass with PHash (good default)
+python photo_dedupe_catalog.py --dir "/path/to/photos" \
+  --phash-threshold 8 \
+  --labels "Birthday party,Beach,Boating,Camping"
+
+# More robust near-dup detection (cropped/filtered pics)
+python photo_dedupe_catalog.py --dir "/path/to/photos" --use-cnn --cnn-threshold 0.92 \
+  --labels "Birthday party,Beach,Boating,Camping"
+
+# Tune your “best photo” criteria (weights must sum to ~1, but any mix is fine)
+python photo_dedupe_catalog.py --dir "/path/to/photos" \
+  --w-sharp 0.55 --w-res 0.25 --w-exposure 0.15 --w-contrast 0.05 \
+  --labels "Birthday party,Beach,Boating,Camping" \
+  --write-keep-delete --make-review-symlinks
+```
+
+### What you get
+
+* `photo_catalog.csv` — one row per image: file path, group\_id, `KEEP` flag, score, EXIF datetime, camera make/model, **lat/lon**, and the **tag** (if CLIP labels were provided).
+* `duplicate_groups.json` — each duplicate group with its members and the chosen “keep”.
+* `keep_list.txt` / `delete_list.txt` — optional, for your own scripts.
+* `review/keep_symlinks/` and `review/dupe_symlinks/` — optional symlink folders for visual review (falls back to copies on platforms that don’t allow symlinks).
+
+### How “best photo” is chosen
+
+A transparent quality score you can tweak:
+
+* **Sharpness** (variance of Laplacian)
+* **Resolution** (capped so megapixels don’t dominate)
+* **Exposure sanity** (prefers mid-gray mean)
+* **Contrast** (prefers healthy histogram spread)
+
+Weights are `--w-sharp, --w-res, --w-exposure, --w-contrast`.
+
+### Tagging (“Birthday party”, “Beach”, etc.)
+
+Pass your labels via `--labels "Birthday party,Beach,Boating,Camping"`.
+If `open-clip-torch` is installed, the script does zero-shot CLIP matching and writes the **best label** into the CSV’s `tag` column. (It’s local and works on CPU; for big folders a GPU helps.)
+
+### EXIF / GPS
+
+The script pulls `DateTimeOriginal`, camera make/model, and **GPS latitude/longitude** (decimal). If you want place names (reverse geocoding), enable it later—we kept the script offline-friendly.
+
+---
+
+If you want, tell me:
+
+* approx. photo count,
+* OS (Windows/macOS/Linux),
+* your exact “best photo” preferences (e.g., “faces matter more”, “prefer landscape orientation”, “prefer photos with GPS vs. without”),
+
+…and I’ll tweak the script (e.g., add a face-count bonus, orientation penalty/bonus, or an optional reverse-geocoder switch).
+
+

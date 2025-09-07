@@ -14,6 +14,7 @@ A lightbox application to rename and delete photos to curate a large collection.
 
 - Ability to order photos by filename or date.
 - Ability to filter photos by wildcard/substrings.
+- add EXIF info loader, or make an EXIF info extractor to prepare for renaming
 - Specialized hot-keys for renaming the shown image according to specific rules.
     - Example format: YYYY MM DD HH:MM Event Location People Description GOOD
     - Optional postfix of DELETE to filename to flag for deletion.
