@@ -17,4 +17,12 @@ A lightbox application to rename and delete photos to curate a large collection.
 
 - Example format: YYYY MM DD HH:MM Event Location People Description GOOD
 
-- optional postfix of DELETE to filename to flag for deletion. 
+- optional postfix of DELETE to filename to flag for deletion.
+
+- Functions to get information for the format like Event Location, People, Description from databases, APIs, file info, etc.
+
+- "Event", "Location", "Description" will be carried between photos to quickly apply to may photos in a sequence.
+
+- Flexible input options for setting "Event" "Location" "Description" "People" and "GOOD" or "DELETE" by keyboard
+
+- Possible feature: Set things using a MIDI keyboard.  Example:  Cdim= DELETE.  Cmaj: normal settings. C7 GOOD.  Need to think through, but leave space for chorded input. settings.

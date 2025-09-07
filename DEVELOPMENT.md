@@ -6,6 +6,9 @@
 
 ## Tech Stack
 
+- Runs on Ubuntu linux and Windows and maybe Mac
+- Java, designed to be as portable as possible
+
 ## Development Guidelines
 
 You are my coding copilot.

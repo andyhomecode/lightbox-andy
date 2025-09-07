@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'com.andyhomecode.lightboxandy'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // TODO: Add dependencies for image/video display, MIDI, etc.
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+task run(type: JavaExec) {
+    main = 'src.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
